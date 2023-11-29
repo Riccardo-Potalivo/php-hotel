@@ -2,9 +2,24 @@
 include 'Model/db.php';
 include __DIR__ . '/partials/header.php';
 
+if (isset($_GET['parking'])) {
+    $parking_available = $_GET['parking'];
+
+    $hotels = array_filter($hotels, fn($parking) => $parking_available === 'all' || $parking['parking'] == $parking_available);
+}
+
 ?>
 
 <main class="container py-5">
+    <form class="mb-5" method="GET" action="index.php">
+        <h4>Parking</h4>
+        <select class="form-select form-select-sm" aria-label="Small select example" name="parking">
+            <option selected value="all">All</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
     <table class="table">
         <thead>
             <tr>
