@@ -8,6 +8,12 @@ if (isset($_GET['parking'])) {
     $hotels = array_filter($hotels, fn($parking) => $parking_available === 'all' || $parking['parking'] == $parking_available);
 }
 
+if (isset($_GET['vote'])) {
+    $hotel_vote = $_GET['vote'];
+
+    $hotels = array_filter($hotels, fn($vote) => $hotel_vote === 'all' || $vote['vote'] >= $hotel_vote);
+}
+
 ?>
 
 <main class="container py-5">
@@ -17,6 +23,16 @@ if (isset($_GET['parking'])) {
             <option selected value="all">All</option>
             <option value="1">Yes</option>
             <option value="0">No</option>
+        </select>
+        <h4>Vote</h4>
+        <select class="form-select form-select-sm" aria-label="Small select example" name="vote">
+            <option selected value="all">All</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+
         </select>
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
