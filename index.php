@@ -17,66 +17,78 @@ if (isset($_GET['vote'])) {
 ?>
 
 <main class="container py-5">
-    <form class="mb-5" method="GET" action="index.php">
-        <h4>Parking</h4>
-        <select class="form-select form-select-sm" aria-label="Small select example" name="parking">
-            <option selected value="all">All</option>
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select>
-        <h4>Vote</h4>
-        <select class="form-select form-select-sm" aria-label="Small select example" name="vote">
-            <option selected value="all">All</option>
-            <option value="5">5</option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
+    <div class="row">
+        <div class="col-12 col-lg-3 card p-3 mb-5">
+            <form class="d-flex d-lg-block  align-items-center  gap-4" method="GET" action="index.php">
+                <h4>Parking</h4>
+                <select class="form-select form-select-sm" aria-label="Small select example" name="parking">
+                    <option selected value="all">All</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <h4 class="mt-lg-4">Vote</h4>
+                <select class="form-select form-select-sm" aria-label="Small select example" name="vote">
+                    <option selected value="all">All</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+                <button class="btn btn-outline-success mt-lg-4" type="submit">Search</button>
+            </form>
+        </div>
 
-        </select>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Parking</th>
-                <th scope="col">Vote</th>
-                <th scope="col">Distance to center</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($hotels as $hotel) { ?>
-                <tr>
-                    <td>
-                        <?php echo $hotel['name'] ?>
-                    </td>
-                    <td>
-                        <?php echo $hotel['description'] ?>
-                    </td>
-                    <td>
-                        <?php echo $hotel['parking'] ?
-                            '<i class="fa-solid fa-check text-success "></i>' :
-                            '<i class="fa-solid fa-xmark text-danger "></i>'
-                            ?>
-
-                    </td>
-                    <td>
-                        <?php for ($i = 1; $i <= 5; $i++) { ?>
-                            <?php echo $hotel['vote'] >= $i ?
-                                '<i class="fa-solid fa-star"></i>' :
-                                '<i class="fa-regular fa-star"></i>'
-                                ?>
+        <?php if (count($hotels)) { ?>
+            <div class="col-12 col-lg-9">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Parking</th>
+                            <th scope="col">Vote</th>
+                            <th scope="col">Distance to center</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($hotels as $hotel) { ?>
+                            <tr>
+                                <td>
+                                    <?php echo $hotel['name'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['description'] ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['parking'] ?
+                                        '<i class="fa-solid fa-check text-success "></i>' :
+                                        '<i class="fa-solid fa-xmark text-danger "></i>'
+                                        ?>
+                                </td>
+                                <td>
+                                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                        <?php echo $hotel['vote'] >= $i ?
+                                            '<i class="fa-solid fa-star"></i>' :
+                                            '<i class="fa-regular fa-star"></i>'
+                                            ?>
+                                    <?php } ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['distance_to_center'] ?> Km
+                                </td>
+                            </tr>
                         <?php } ?>
-                    </td>
-                    <td>
-                        <?php echo $hotel['distance_to_center'] ?> Km
-                    </td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+                    </tbody>
+                </table>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-danger">
+                Not found
+            </div>
+        <?php } ?>
+
+    </div>
 
 
 </main>
