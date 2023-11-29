@@ -5,16 +5,39 @@ include __DIR__ . '/partials/header.php';
 ?>
 
 <main class="container">
-    <?php foreach ($hotels as $hotel) { ?>
-        <div>
-            <h2>
-                <?php echo $hotel['name'] ?>
-            </h2>
-            <p>
-                <?php echo $hotel['description'] ?>
-            </p>
-        </div>
-    <?php } ?>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Parking</th>
+                <th scope="col">Vote</th>
+                <th scope="col">Distance to center</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($hotels as $hotel) { ?>
+                <tr>
+                    <td>
+                        <?php echo $hotel['name'] ?>
+                    </td>
+                    <td>
+                        <?php echo $hotel['description'] ?>
+                    </td>
+                    <td>
+                        <?php echo $hotel['parking'] ?>
+                    </td>
+                    <td>
+                        <?php echo $hotel['vote'] ?>
+                    </td>
+                    <td>
+                        <?php echo $hotel['distance_to_center'] ?>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+
 
 </main>
 
